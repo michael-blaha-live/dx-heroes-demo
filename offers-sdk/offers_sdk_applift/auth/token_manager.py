@@ -8,8 +8,8 @@ from typing import Optional
 from platformdirs import user_cache_dir
 from filelock import FileLock
 
-from offers_sdk.interfaces import TokenManagerInterface
-from offers_sdk.exceptions import AuthenticationError, APIError
+from offers_sdk_applift.interfaces import TokenManagerInterface
+from offers_sdk_applift.exceptions import AuthenticationError, APIError
 
 
 class TokenManager(TokenManagerInterface):

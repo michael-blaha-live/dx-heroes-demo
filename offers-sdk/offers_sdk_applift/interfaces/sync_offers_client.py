@@ -1,6 +1,6 @@
 import uuid
 from typing import Protocol, List
-from offers_sdk.models import Product, Offer
+from offers_sdk_applift.models import Product, Offer
 
 
 class SyncOffersClientInterface(Protocol):

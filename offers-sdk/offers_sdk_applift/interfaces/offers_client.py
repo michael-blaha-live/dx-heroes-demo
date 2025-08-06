@@ -1,7 +1,7 @@
 from typing import Protocol, List
 import uuid
 
-from offers_sdk.models import Product, Offer
+from offers_sdk_applift.models import Product, Offer
 
 
 class OffersClientInterface(Protocol):

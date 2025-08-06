@@ -45,9 +45,12 @@ The SDK will automatically load variables from this file.
 Here is a quick example of how to use the async client to register a product and retrieve its offers.
 
 ```python
+from dotenv import load_dotenv
+load_dotenv()  # Load .env needed before initialization of SDK
+
 import asyncio
 import uuid
-from offers_sdk import HttpxOffersClient, APIError
+from offers_sdk_applift import HttpxOffersClient, APIError
 
 async def main():
     """
@@ -100,8 +103,8 @@ This is the primary, high-performance client. It should be used with `async` wit
 
 ```python
 import uuid
-from offers_sdk import HttpxOffersClient
-from offers_sdk.exceptions import ProductNotFoundError
+from offers_sdk_applift import HttpxOffersClient
+from offers_sdk_applift.exceptions import ProductNotFoundError
 
 async def manage_offers():
     # Use the factory to create a client. It will load the token
@@ -120,8 +123,8 @@ For use in standard synchronous Python code (e.g., a simple script, a Flask app)
 
 ```python
 import uuid
-from offers_sdk import SyncOffersClient # Note: This is the final name we decided on
-from offers_sdk.exceptions import ProductAlreadyExistsError
+from offers_sdk_applift import SyncOffersClient # Note: This is the final name we decided on
+from offers_sdk_applift.exceptions import ProductAlreadyExistsError
 
 def manage_offers_sync():
     # The sync client works as a standard context manager
@@ -164,8 +167,8 @@ The SDK is built with abstract interfaces (Protocols) to make testing your own a
 
 ### Your Application Code:
 ```python
-from offers_sdk.interfaces import OffersClientInterface # Depend on the interface!
-from offers_sdk.models import Offer
+from offers_sdk_applift.interfaces import OffersClientInterface # Depend on the interface!
+from offers_sdk_applift.models import Offer
 
 async def get_cheapest_offer(client: OffersClientInterface, product_id) -> Offer | None:
     """This function is decoupled from the real client and is easy to test."""
@@ -177,7 +180,7 @@ async def get_cheapest_offer(client: OffersClientInterface, product_id) -> Offer
 
 ### Your Test Code:
 ```python
-from offers_sdk.interfaces import OffersClientInterface
+from offers_sdk_applift.interfaces import OffersClientInterface
 
 class FakeOffersClient(OffersClientInterface):
     """A fake client for testing that conforms to the interface."""

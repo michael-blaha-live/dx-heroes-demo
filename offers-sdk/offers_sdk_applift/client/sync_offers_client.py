@@ -2,10 +2,10 @@ import asyncio
 from typing import List
 import uuid
 
-from offers_sdk.config import get_settings
-from offers_sdk.interfaces import SyncOffersClientInterface, OffersClientInterface
+from offers_sdk_applift.config import get_settings
+from offers_sdk_applift.interfaces import SyncOffersClientInterface, OffersClientInterface
 from .httpx_offers_client import HttpxOffersClient
-from offers_sdk.models import Product, Offer
+from offers_sdk_applift.models import Product, Offer
 
 settings = get_settings()
 

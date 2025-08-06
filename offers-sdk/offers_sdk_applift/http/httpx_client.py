@@ -1,6 +1,6 @@
 from typing import Any
 from httpx import Response, AsyncClient
-from offers_sdk.interfaces  import AsyncHttpClientInterface
+from offers_sdk_applift.interfaces  import AsyncHttpClientInterface
 
 
 class HttpxClient(AsyncHttpClientInterface):

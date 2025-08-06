@@ -2,11 +2,11 @@ import pytest
 from respx import MockRouter
 from pathlib import Path
 
-from offers_sdk.config import get_settings
+from offers_sdk_applift.config import get_settings
 from dotenv import load_dotenv
-from offers_sdk.interfaces import TokenManagerInterface, OffersClientInterface
-from offers_sdk.http import HttpxClient
-from offers_sdk.client import HttpxOffersClient
+from offers_sdk_applift.interfaces import TokenManagerInterface, OffersClientInterface
+from offers_sdk_applift.http import HttpxClient
+from offers_sdk_applift.client import HttpxOffersClient
 
 
 @pytest.fixture(scope="session", autouse=True)

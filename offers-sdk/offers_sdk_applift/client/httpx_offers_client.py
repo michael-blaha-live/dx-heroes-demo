@@ -2,15 +2,15 @@ import uuid
 import httpx
 from typing import List
 
-from offers_sdk.config import get_settings
-from offers_sdk.interfaces import OffersClientInterface, AsyncHttpClientInterface, TokenManagerInterface
-from offers_sdk.auth import TokenManager
-from offers_sdk.models import RegisterProductRequest, Product, Offer
-from offers_sdk.exceptions import (
+from offers_sdk_applift.config import get_settings
+from offers_sdk_applift.interfaces import OffersClientInterface, AsyncHttpClientInterface, TokenManagerInterface
+from offers_sdk_applift.auth import TokenManager
+from offers_sdk_applift.models import RegisterProductRequest, Product, Offer
+from offers_sdk_applift.exceptions import (
     APIError, ProductNotFoundError, ProductAlreadyExistsError, AuthenticationError
 )
 
-from offers_sdk.http import HttpxClient
+from offers_sdk_applift.http import HttpxClient
 
 
 class HttpxOffersClient(OffersClientInterface):

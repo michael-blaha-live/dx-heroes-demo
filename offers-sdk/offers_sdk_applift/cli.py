@@ -3,7 +3,6 @@ import uuid
 from typing import Optional
 
 import typer
-from dotenv import load_dotenv
 from pydantic import ValidationError
 from rich.console import Console
 from rich.table import Table
@@ -14,7 +13,6 @@ from .config import get_settings
 from .exceptions import APIError, ProductNotFoundError
 
 
-load_dotenv()
 app = typer.Typer(
     name="offers-cli",
     help="A CLI for the Offers SDK to register products and retrieve offers.",

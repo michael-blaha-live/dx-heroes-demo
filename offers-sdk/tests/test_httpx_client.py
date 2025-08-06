@@ -2,8 +2,8 @@ import uuid
 import pytest
 from respx import MockRouter
 
-from offers_sdk.interfaces import OffersClientInterface
-from offers_sdk.exceptions import ProductNotFoundError, ProductAlreadyExistsError, APIError
+from offers_sdk_applift.interfaces import OffersClientInterface
+from offers_sdk_applift.exceptions import ProductNotFoundError, ProductAlreadyExistsError, APIError
 from tests.conftest import FakeTokenManager # Import the fake class for assertions
 
 

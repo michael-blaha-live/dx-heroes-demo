@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     TOKEN_EXPIRATION_SECONDS: int
     TOKEN_EXPIRATION_BUFFER_SECONDS: int
     
-    model_config = SettingsConfigDict(env_file="../.env", env_file_encoding='utf-8')
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding='utf-8')
 
 
 @functools.lru_cache
