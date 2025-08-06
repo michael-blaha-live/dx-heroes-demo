@@ -18,7 +18,7 @@ Companion CLI: Includes a powerful command-line tool (`offers-cli`) for easy int
 
 ## Installation
 ```bash
-pip install offers-sdk
+pip install offers-sdk-applift
 ```
 
 ## Configuration
