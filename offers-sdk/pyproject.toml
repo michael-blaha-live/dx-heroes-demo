@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "offers-sdk-applift"
-version = "0.1.3"
+version = "0.1.4"
 description = "An SDK for Offers API."
 authors = ["michael-blaha-live <michael.blaha.live@outlook.cz>"]
 readme = "README.md"
