@@ -6,7 +6,7 @@ from offers_sdk_applift.config import get_settings
 from dotenv import load_dotenv
 from offers_sdk_applift.interfaces import TokenManagerInterface, OffersClientInterface
 from offers_sdk_applift.http import HttpxClient
-from offers_sdk_applift.client import HttpxOffersClient
+from offers_sdk_applift.clients import HttpxOffersClient
 
 
 @pytest.fixture(scope="session", autouse=True)

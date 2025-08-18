@@ -59,7 +59,7 @@ class HttpxOffersClient(OffersClientInterface):
         """
         settings = get_settings()
         
-        http_client = HttpxClient(base_url=settings.OFFERS_API_BASE_URL)
+        http_client = HttpxClient(base_url=base_url or settings.OFFERS_API_BASE_URL)
         token_manager = TokenManager(
             refresh_token=refresh_token, 
             http_client=http_client,

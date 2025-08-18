@@ -12,7 +12,7 @@ from .models import (
     Offer,
 )
 
-from .client import (
+from .clients import (
     HttpxOffersClient,
     SyncOffersClient,
 )

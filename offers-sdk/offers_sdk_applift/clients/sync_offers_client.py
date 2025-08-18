@@ -47,7 +47,7 @@ class SyncOffersClient(SyncOffersClientInterface): # Implements the sync interfa
         Returns:
             SyncOffersAPI: A new instance of the synchronous client.
         """
-        async_client = HttpxOffersClient(refresh_token=refresh_token, base_url=base_url)
+        async_client = HttpxOffersClient.from_credentials(refresh_token=refresh_token, base_url=base_url)
         return cls(async_client=async_client)
 
     def register_product(
