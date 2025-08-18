@@ -21,6 +21,7 @@ pytest-asyncio = "^1.1.0"
 respx = "^0.22.0"
 python-dotenv = "^1.1.1"
 ruff = "^0.12.7"
+pytest-mock = "^3.14.1"
 
 [tool.poetry.scripts]
 offers-cli = "offers_sdk_applift.cli:app"
