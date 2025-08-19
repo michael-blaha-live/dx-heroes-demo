@@ -130,7 +130,6 @@ async def test_httpx_client_factory_uses_custom_base_url(respx_mock: MockRouter)
     product_id = uuid.uuid4()
 
     # 2. Arrange: Mock BOTH endpoints that will be called during the operation.
-    #    THE FIX: Add the missing mock for the /auth endpoint at the custom URL.
     respx_mock.post(f"{custom_url}/auth").respond(201, json={"access_token": "dummy-access-token"})
     
     #    The original mock for the /offers endpoint is still needed.
