@@ -22,10 +22,10 @@ from .exceptions import (
     AuthenticationError,
     APIError,
     ProductNotFoundError,
-    ProductAlreadyExistsError,
+    ProductAlreadyFoundError,
 )
 
-__all__ = ['ProductAlreadyExistsError', 'ProductNotFoundError', 'BaseOffersSDKError', 'AuthenticationError', 
+__all__ = ['ProductAlreadyFoundError', 'ProductNotFoundError', 'BaseOffersSDKError', 'AuthenticationError', 
            'APIError', 'AuthenticationError', 'BaseOffersSDKError', 'HttpxOffersClient', 'SyncOffersClient',
            'Product', 'Offer', 'AsyncHttpClientInterface', 'OffersClientInterface', 'SyncOffersClientInterface', 
            'TokenManagerInterface', 'get_settings']

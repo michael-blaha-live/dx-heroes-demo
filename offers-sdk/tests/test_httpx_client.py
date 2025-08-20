@@ -4,7 +4,7 @@ from respx import MockRouter
 
 from offers_sdk_applift.clients import HttpxOffersClient
 from offers_sdk_applift.interfaces import OffersClientInterface
-from offers_sdk_applift.exceptions import ProductNotFoundError, ProductAlreadyExistsError, APIError
+from offers_sdk_applift.exceptions import ProductNotFoundError, ProductAlreadyFoundError, APIError
 from tests.conftest import FakeTokenManager # Import the fake class for assertions
 
 
@@ -35,13 +35,13 @@ async def test_register_product_success(
 async def test_register_product_raises_conflict_on_409(
     offers_client: OffersClientInterface, respx_mock: MockRouter
 ):
-    """Tests that a 409 Conflict correctly raises ProductAlreadyExistsError."""
+    """Tests that a 409 Conflict correctly raises ProductAlreadyFoundError."""
     product_id = uuid.uuid4()
     respx_mock.post(url__regex=r".*/products/register").respond(
         409, json={"detail": "Product ID already registered"}
     )
 
-    with pytest.raises(ProductAlreadyExistsError):
+    with pytest.raises(ProductAlreadyFoundError):
         await offers_client.register_product(
             product_id=product_id, name="Duplicate Product", description="A test."
         )

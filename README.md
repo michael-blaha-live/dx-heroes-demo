@@ -124,7 +124,7 @@ For use in standard synchronous Python code (e.g., a simple script, a Flask app)
 ```python
 import uuid
 from offers_sdk_applift import SyncOffersClient # Note: This is the final name we decided on
-from offers_sdk_applift.exceptions import ProductAlreadyExistsError
+from offers_sdk_applift.exceptions import ProductAlreadyFoundError
 
 def manage_offers_sync():
     # The sync client works as a standard context manager
@@ -136,7 +136,7 @@ def manage_offers_sync():
                 name="Sync Gadget",
                 description="Registered from a sync script."
             )
-        except ProductAlreadyExistsError:
+        except ProductAlreadyFoundError:
             print("This product has already been registered.")
 ```
 
