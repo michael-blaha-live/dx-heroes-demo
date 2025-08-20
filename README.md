@@ -109,7 +109,7 @@ from offers_sdk_applift.exceptions import ProductNotFoundError
 async def manage_offers():
     # Use the factory to create a client. It will load the token
     # from the environment automatically.
-    async with HttpxOffersClient.from_credentials() as client:
+    async with HttpxOffersClient.from_credentials(refresh_token="your-super-secret-refresh-token") as client:
         try:
             offers = await client.get_offers(uuid.uuid4())
             # ... process offers
@@ -128,7 +128,7 @@ from offers_sdk_applift.exceptions import ProductAlreadyExistsError
 
 def manage_offers_sync():
     # The sync client works as a standard context manager
-    with SyncOffersClient.from_credentials() as client:
+    with SyncOffersClient.from_credentials(refresh_token="your-super-secret-refresh-token") as client:
         try:
             product_id = uuid.uuid4()
             client.register_product(

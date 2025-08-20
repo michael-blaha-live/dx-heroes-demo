@@ -2,6 +2,7 @@ import uuid
 import pytest
 from respx import MockRouter
 
+from offers_sdk_applift.clients import HttpxOffersClient
 from offers_sdk_applift.interfaces import OffersClientInterface
 from offers_sdk_applift.exceptions import ProductNotFoundError, ProductAlreadyExistsError, APIError
 from tests.conftest import FakeTokenManager # Import the fake class for assertions
@@ -117,3 +118,30 @@ async def test_get_offers_raises_api_error_on_503(
         await offers_client.get_offers(product_id)
         
     assert exc_info.value.status_code == 503
+
+@pytest.mark.asyncio
+async def test_httpx_client_factory_uses_custom_base_url(respx_mock: MockRouter):
+    """
+    Tests that the HttpxOffersClient uses the base_url provided to its
+    factory method instead of the default.
+    """
+    # 1. Arrange: Define a custom URL and a product ID
+    custom_url = "https://my-custom-api.com/v1"
+    product_id = uuid.uuid4()
+
+    # 2. Arrange: Mock BOTH endpoints that will be called during the operation.
+    respx_mock.post(f"{custom_url}/auth").respond(201, json={"access_token": "dummy-access-token"})
+    
+    #    The original mock for the /offers endpoint is still needed.
+    expected_endpoint = f"{custom_url}/products/{product_id}/offers"
+    custom_route = respx_mock.get(expected_endpoint).respond(200, json=[])
+
+    # 3. Act: Create and use the client
+    async with HttpxOffersClient.from_credentials(
+        refresh_token="dummy-token", base_url=custom_url
+    ) as client:
+        await client.get_offers(product_id)
+
+    # 4. Assert: Check that our specific, custom-URL route was called.
+    assert custom_route.called
+

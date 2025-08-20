@@ -7,7 +7,7 @@ from pydantic import ValidationError
 from rich.console import Console
 from rich.table import Table
 
-from .client import HttpxOffersClient
+from .clients import HttpxOffersClient
 from .interfaces import OffersClientInterface
 from .config import get_settings
 from .exceptions import APIError, ProductNotFoundError
