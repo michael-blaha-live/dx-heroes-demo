@@ -6,9 +6,7 @@ from offers_sdk_applift.config import get_settings
 from offers_sdk_applift.interfaces import OffersClientInterface, AsyncHttpClientInterface, TokenManagerInterface
 from offers_sdk_applift.auth import TokenManager
 from offers_sdk_applift.models import RegisterProductRequest, Product, Offer
-from offers_sdk_applift.exceptions import (
-    APIError, ProductNotFoundError, ProductAlreadyExistsError, AuthenticationError
-)
+from offers_sdk_applift.exceptions import request_exception_handler
 
 from offers_sdk_applift.http import HttpxClient
 
@@ -68,6 +66,7 @@ class HttpxOffersClient(OffersClientInterface):
         )
         return cls(http_client=http_client, token_manager=token_manager)
 
+    @request_exception_handler
     async def _make_request(self, method: str, url: str, **kwargs) -> httpx.Response:
         """A private helper to orchestrate token retrieval and request execution."""
         access_token = await self._token_manager.get_access_token()
@@ -76,29 +75,10 @@ class HttpxOffersClient(OffersClientInterface):
             **(kwargs.pop("headers", {})),
         }
 
-        try:
-            response = await self._http_client.request(
+        response = await self._http_client.request(
                 method, url, headers=headers, **kwargs
             )
-            match response.status_code:
-                case 401: 
-                    raise AuthenticationError("Request failed: Invalid access token.")
-                case 404: 
-                    raise ProductNotFoundError(response.status_code, response.text)
-                case 409: 
-                    raise ProductAlreadyExistsError(response.status_code, response.text)
-
-            response.raise_for_status()
-            return response
-        except httpx.HTTPStatusError as e:
-            # We specifically catch HTTP errors and preserve the original status code
-            raise APIError(status_code=e.response.status_code, message=str(e)) from e
-        except Exception as e:
-            # This catches other errors (e.g., timeouts, network issues)
-            # and wraps them in a generic 500 error.
-            if isinstance(e, APIError):
-                raise  # Don't re-wrap our own exceptions
-            raise APIError(status_code=500, message=str(e)) from e
+        return response
 
     async def register_product(
         self, product_id: uuid.UUID, name: str, description: str
